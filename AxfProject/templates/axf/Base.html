@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {#    导入一个模块使项目可以在移动端正常显示#}
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="{% static 'base/css/bootstrap.css' %}"> {# 导入bootstrap模块的样式 #}
+    <link rel="stylesheet" href="{% static 'base/css/swiper.css' %}">  {# 导入swiper模块的样式 #}
+    <script type="text/javascript" src="{% static 'base/js/jquery.js' %}"></script> {# 导入jQuery #}
+    <script type="text/javascript" src="{% static 'base/js/bootstrap.js' %}"></script>{# 导入bootstrap的js #}
+    <script type="text/javascript" src="{% static 'base/js/swiper.jquery.js' %}"></script>{# 导入swiper的js #}
+    <link rel="stylesheet" href="{% static 'base/css/base.css' %}"> {# 导入axf的模板样式 #}
+    <link rel="stylesheet" href="{% static 'base/css/reset.css' %}">{# 导入初始化的reset样式 目的是将默认样式全部清除 #}
+    <script type="text/javascript" src="{% static 'base/js/base.js' %}"></script>{# 导入axf的js #}
+
+    <title>{{ pageTitle }}</title>
+    {% block personResource %}
+    {% endblock %}
+</head>
+<body>
+    <header>
+        {% block myheader %}
+        {% endblock %}
+    </header>
+
+    <div>
+        {% block content %}
+
+        {% endblock %}
+    </div>
+
+    <footer>
+
+        <a href="{% url 'axf:home' %}" class="home">
+            <dl>
+                <dt><span></span></dt>
+                <dd>主页</dd>
+            </dl>
+        </a>     {# 在这里做了首次进入的处理方法 因此之前的 views里面market方法是失效的 #}
+         <a href="{% url 'axf:marketCategory' 104749 0 0 %}" class="market">
+            <dl>
+                <dt><span></span></dt>
+                <dd>闪送超市</dd>
+            </dl>
+        </a>
+         <a href="{% url 'axf:cart' %}" class="cart">
+            <dl>
+                <dt><span></span></dt>
+                <dd>购物车</dd>
+            </dl>
+        </a>
+         <a href="{% url 'axf:mine' %}" class="mine">
+            <dl>
+                <dt><span></span></dt>
+                <dd>我的</dd>
+            </dl>
+        </a>
+
+    </footer>
+</body>
+</html>

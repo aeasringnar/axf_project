@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>未登录，请前往注册！</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="{% static 'login/css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'base/css/reset.css' %}">
+    <script type="text/javascript" src="{% static 'base/js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'base/js/base.js' %}"></script>
+    <style type="text/css">
+        .content div{
+            width: 100%;
+            height: 20%;
+            font-size: 0.5rem;
+            text-align: center;
+        }
+        button{
+            margin-top: 0.5rem;
+            margin-left: 3.5rem;
+            height: 1rem;
+            width: 3rem;
+            border-radius: 0.5rem;
+            font-size: 0.5rem;
+            color: white;
+            background: #5bc0de;
+            box-shadow: none;
+            color: white;
+        }
+        button a{
+            color: white !important;
+        }
+    </style>
+</head>
+<body>
+<div id="ulogin">
+    <button class="past"><a href="{% url 'axf:home' %}">&lt返回&nbsp</a></button>
+    <div class="content">
+        <div><h1>好像没登录！无法使用购物车哦！</h1></div>
+        <button><a href="{% url 'axf:register_two' %}">注册</a></button>
+        <button><a href="{% url 'axf:login' %}">登录</a></button>
+    </div>
+</div>
+</body>
+</html>

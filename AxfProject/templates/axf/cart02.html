@@ -1,0 +1,178 @@
+{% extends 'axf/Base.html' %}
+{% load static %}
+{% block personResource %}
+    <link rel="stylesheet" href="{% static 'cart02/css/cart.css' %}">
+    {#    <script type="text/javascript" src="{% static 'base/js/jquery.js' %}"></script>#}
+    <script type="text/javascript">
+        $(function () {
+            {#            获取删除这个按钮#}
+            var mydel = $('.mydel');
+            {#            自定义的函数,用来处理选择价钱的#}
+
+            function myfunc(allimg) {
+                var mylen = allimg.length;
+                var j = 0;
+                var sum = 0;
+                for (var i = 0; i < mylen; i++) {
+                    var needtwo = allimg[i];
+                    var needthree = needtwo.attributes['0'].nodeValue;
+                    if (needthree == '/static/base/img/round_select.png') {
+                        j++;
+                        var myneedd = allimg[i].parentElement.parentElement.parentElement;
+                        var myneeddd = myneedd.children;
+                        var testprice = (myneeddd[1].children)[1].innerHTML;
+                        var price = testprice.substring(2);
+                        var testnum = (myneeddd[2].children)[1].innerHTML;
+                        var myprice = Number(price) * Number(testnum);
+                        sum = sum + myprice
+                    }
+                }
+                var myprice = $('.myprece');
+                myprice[0].innerHTML = sum.toFixed(2);
+                if (j == mylen) {
+                    $('.myleft').children('img').attr('src', '/static/base/img/round_select.png');
+                }
+                if (j == 0) {
+                    mydel.css('color', '#ccc');
+                }
+            }
+
+            {#            处理获取所有商品ID的函数#}
+
+            function getgoodid(allimg) {
+                var mylen = allimg.length;
+                var arr = new Array();
+                for (var i = 0; i < mylen; i++) {
+                    var needtwo = allimg[i];
+                    var needthree = needtwo.attributes['0'].nodeValue;
+                    if (needthree == '/static/base/img/round_select.png') {
+                        var mypar = allimg[i].parentElement;
+                        var myid = (mypar.children)[1].innerHTML;
+                        arr.push(Number(myid));
+                    }
+                }
+                {#                测试是否成功#}
+                {#                console.log(arr);#}
+                return arr
+            }
+
+            {#            目的是为了当数量为一时就不能再次点击，变成灰色#}
+            $('.mycartleft').click(function () {
+                var myp = $(this).parent();
+                var myn = myp.next().html();
+                console.log(myn);
+                if (myn == 1) {
+                    $(this).css('background', '#ccc');
+                }
+            });
+            {#            按钮点击事件#}
+            $('.usleft').click(function () {
+                var myimg = $(this).children('img');
+                var allimg = $('.usleft').children('img');
+                if (myimg.attr('src') == '/static/base/img/round.png') {
+                    myimg.attr('src', '/static/base/img/round_select.png');
+                    var allimg = $('.usleft').children('img');
+                    myfunc(allimg);
+                    mydel.css('color', 'black');
+                } else {
+                    myimg.attr('src', '/static/base/img/round.png');
+                    $('.myleft').children('img').attr('src', '/static/base/img/round.png');
+                    var allimg = $('.usleft').children('img');
+                    myfunc(allimg);
+                }
+            });
+            {#            全选按钮事件#}
+            $('.myleft').click(function () {
+                var allimg = $('.usleft').children('img');
+                var onesrue = $(this).children('img');
+                if (onesrue.attr('src') == '/static/base/img/round.png') {
+                    onesrue.attr('src', '/static/base/img/round_select.png');
+                    allimg.attr('src', '/static/base/img/round_select.png');
+                    {#                    这里是将删除按钮变高亮显示#}
+                    mydel.css('color', 'black');
+                    {#                    下面是获取所有价格的方法#}
+                    var gprice = $('.gprice');
+                    var mynum = $('.mynum');
+                    var dum = 0;
+                    for (var i = 0; i < gprice.length; i++) {
+                        var myprice = (gprice[i].innerHTML).substring(2);
+                        var mynumtwo = (mynum[i].innerHTML);
+                        var mypricetwo = Number(myprice) * Number(mynumtwo);
+                        dum += mypricetwo;
+                    }
+                    var myprice = $('.myprece');
+                    {#                    显示价格并设定小数点位数#}
+                    myprice[0].innerHTML = dum.toFixed(2);
+                } else {
+                    onesrue.attr('src', '/static/base/img/round.png');
+                    allimg.attr('src', '/static/base/img/round.png');
+                    var myprice = $('.myprece');
+                    myprice[0].innerHTML = '0.0';
+                    mydel.css('color', '#ccc');
+                }
+            });
+            {#            获取所有商品ID的事件#}
+            $('.myright').click(function () {
+                {#                应该获取所有的数据ID返回给后端#}
+                var allimg = $('.usleft').children('img');
+                var arr = getgoodid(allimg);
+
+            });
+            mydel.click(function () {
+                var allimg = $('.usleft').children('img');
+                var arr = getgoodid(allimg);
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://127.0.0.1:8000/axf/delgoods/',
+                    data: {'ids':arr},
+                    dataType: 'json',
+                    traditional:true,
+                });
+            })
+        })
+    </script>
+{% endblock %}
+{% block myheader %}
+    <div class="mydel" onclick="window.location.href='http://127.0.0.1:8000/axf/cart/'" >删除</div>
+{% endblock %}
+{% block content %}
+    <div class="contents">
+        <div class="mycontent">
+            {% for ugood in ugoods %}
+                <div class="cartgoods">
+                    <div class="uleft">
+                        <div class="usleft">
+                            <img src="{% static 'base/img/round.png' %}">
+                            <span class="goodid" style="display: none">{{ ugood.id }}</span>
+                        </div>
+                        <div class="usright">
+                            <img src="{{ ugood.tgoodid.productimg }}">
+                        </div>
+                    </div>
+                    <div class="uright">
+                        <p>{{ ugood.tgoodid.productname }}</p>
+                        <p class="gprice">￥：{{ ugood.tgoodid.price }}</p>
+                    </div>
+                    <div class="cartcontent">
+                        <a href="{% url 'axf:goodsub' ugood.tgoodid.id %}">
+                            <div class="mycartleft">-</div>
+                        </a>
+                        <div class="mynum">{{ ugood.tgoodnum }}</div>
+                        <a href="{% url 'axf:goodadd' ugood.tgoodid.id %}">
+                            <div class="mycartright">+</div>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div id="mytrue">
+            <div class="myleft"><img src="{% static 'base/img/round.png' %}"></div>
+            <div class="mycenter">
+                <div class="centerleft">金额￥:</div>
+                <div class="myprece"></div>
+            </div>
+            <div class="myright">去结算</div>
+        </div>
+    </div>
+
+{% endblock %}

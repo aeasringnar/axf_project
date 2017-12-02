@@ -1,0 +1,185 @@
+footer .cart span {
+    background: url(/static/base/img/cart1.png) no-repeat;
+    background-size: 0.513889rem;
+}
+footer .cart{
+    color: gold;
+}
+body{
+    width: 100%;
+    height: 100%;
+    position: absolute; /*设置使最外层的框架固定不动使内部的可以动*/
+}
+.contents{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-bottom: 3rem;
+}
+.mycontent{
+    margin-top: 1.5rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.cartgoods{
+    width: 100%;
+    height: 2.5rem;
+    overflow: hidden;
+    position: relative;
+}
+.uleft{
+    float: left;
+    width: 4rem;
+    overflow: hidden;
+}
+.uright{
+    float: right;
+    width: 6rem;
+}
+.uright p:first-child{
+    height: 0.7rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.uright p:last-child{
+    color: red;
+}
+.usleft{
+    float: left;
+    line-height: 2.5rem;
+    text-align: center;
+    width: 1.5rem;
+    height: 100%;
+}
+.usright{
+    float: right;
+}
+.usleft img{
+    width: 1rem;
+}
+.usright img{
+    height: 2.5rem;
+}
+/*操作购物车*/
+.cartcontent{
+    height: 0.8rem;
+    width: 3.6rem;
+    background: yellow;
+    position: absolute;
+    bottom: 0.05rem;
+    left: 4rem;
+    overflow: hidden;
+}
+.cartcontent div{
+    float: left;
+}
+.mynum{
+    width: 2rem;
+    height: 0.8rem;
+    background: #cccccc;
+    border: 0.01rem solid red;
+    text-align: center;
+    line-height: 0.8rem;
+}
+.mycartleft{
+    font-size: 1rem;
+    font-weight: bold;
+    width: 0.8rem !important;
+    height: 0.8rem;
+    text-align: center;
+    line-height: 0.8rem;
+    /*border-radius: 50%;*/
+    background: red;
+    /*position: absolute;*/
+    /*bottom: 0.05rem;*/
+    /*left: 4rem;*/
+    color: white;
+}
+.mycartright{
+    font-size: 1rem;
+    font-weight: bold;
+    width: 0.8rem !important;
+    height: 0.8rem;
+    text-align: center;
+    line-height: 0.8rem;
+    /*border-radius: 50%;*/
+    background: red;
+    /*position: absolute;*/
+    /*bottom: 0.05rem;*/
+    /*left: 4rem;*/
+    color: white;
+}
+
+/**/
+#mytrue{
+    background-color: white;
+    width: 100%;
+    height: 1.5rem;
+    position: fixed;
+    bottom: 1.5rem;
+    overflow: hidden;
+}
+#mytrue div{
+    float: left;
+}
+.myleft{
+    height: 100%;
+    width: 1.5rem;
+    /*background: yellow;*/
+    line-height: 1.5rem;
+    text-align: center;
+}
+.myleft img{
+    width: 1rem;
+}
+.mycenter{
+    height: 100%;
+    width: 5rem;
+    /*background: blue;*/
+    overflow: hidden;
+}
+.centerleft{
+    height: 100%;
+    width: 2rem;
+    /*background: blue;*/
+    float: left;
+    font-size: 0.5rem;
+    line-height: 1.5rem;
+    color: black;
+    text-align: center;
+}
+.myprece{
+    height: 100%;
+    width: 3rem;
+    /*background: blue;*/
+    float: right;
+    font-size: 0.5rem;
+    line-height: 1.5rem;
+    color: black;
+    text-align: center;
+}
+.myright{
+    height: 100%;
+    width: 3.5rem;
+    background: pink;
+    font-size: 0.8rem;
+    line-height: 1.5rem;
+    text-align: center;
+    color: black;
+}
+/*删除按钮*/
+.mydel{
+    width: 1.2rem;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    text-align: center;
+    font-size: 0.5rem;
+    color: #ccc;
+    background: cyan;
+    position: fixed;
+    right: 0.5rem;
+    top: 0.6rem;
+}

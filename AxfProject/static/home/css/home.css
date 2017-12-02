@@ -1,0 +1,165 @@
+footer .home span {
+    background: url(/static/base/img/home1.png) no-repeat;
+    background-size: 0.513889rem;
+}
+
+footer .home {
+    color: gold;
+}
+
+.swiper-container {
+    width: 100%;
+}
+/*定义轮播图片宽度 高度自适应*/
+.swiper-container img{
+    width: 100%;
+}
+/*轮播样式*/
+.swiper-slide {
+    text-align: center;
+    /*background: pink;*/
+    /*height: 2.5rem;*/
+}
+/*二级轮播样式*/
+.swiper-myswiper{
+    width: 100%;
+    /*height: 3rem;*/
+}
+.swiper-myswiper img{
+    width: 100%;
+    height: 100%;
+}
+/*必买菜单 在这里清除了浮动*/
+.mustbuy{
+    /*background: black;*/
+    margin-top: 0.2rem;
+    overflow: hidden;
+}
+/*body,html{*/
+    /*width: 100%;*/
+    /*height: 100%;*/
+/*}*/
+/*最外层home的样式*/
+#home {
+    margin-top: 1.5rem;
+    padding-bottom: 3rem;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: white;
+    position: fixed;
+}
+/*导航菜单样式*/
+/*高度自适应*/
+.topMenu li{
+    width: 2.5rem;
+    /*height: 2.5rem;*/
+    float: left;
+    /*background: yellow;*/
+    font-size: 0.4rem;
+    text-align: center;
+}
+.topMenu img{
+    width: 100%;
+    /*height: 100%;*/
+}
+
+/*清除浮动的方法*/
+.clearfloat{
+    overflow: hidden;
+}
+/*下级的大块菜单*/
+.shop{
+    margin-top: 0.2rem;
+}
+.shop .shop1{
+    width: 100%;
+    /*height:1rem;*/
+    /*background: blue;*/
+}
+.shop .shop1 img{
+    width: 100%;
+}
+.shop2 li{
+    width: 5rem;
+    /*height: 2.5rem;*/
+    float: left;
+    /*background: pink;*/
+}
+.shop2 li img{
+    width:100%;
+}
+.shop3 li{
+    width: 2.5rem;
+    /*height: 2.5rem;*/
+    float: left;
+    /*background: yellow;*/
+}
+.shop3 li img{
+    width: 100%;
+}
+.shop4 li{
+    width: 5rem;
+    /*height: 2.5rem;*/
+    float: left;
+    /*background: blue;*/
+}
+.shop4 li img{
+    width: 100%;
+}
+
+/*maininfo样式*/
+/*商品详情第一个头部*/
+.infoheader{
+    position: relative;
+    height: 1.2rem;
+}
+.infoheader h3{
+    text-align: center;
+    /*position: relative;*/
+    margin-top: 0.1rem;
+}
+.infoheader a{
+    display: block;
+    float: right;
+    position: absolute;
+    right: 0.2rem;
+    font-size: 0.2rem;
+}
+.infoheader span{
+    display: block;
+    width: 0.6rem;
+    height: 0.1rem;
+    background: yellow;
+    margin-left: 4.7rem;
+    margin-top: 0.3rem;
+}
+
+.maininfo .mainimg{
+    width: 100%;
+}
+.maininfo .mainimg img{
+    width:100%;
+}
+.mainmenu li{
+    float: left;
+    width: 3.33rem;
+}
+.mainmenu li img{
+    width: 100%;
+}
+.maininfo1{
+    font-size: 0.4rem;
+    color: black;
+    overflow: hidden;
+    width: 3rem;
+    height: 1.2rem;
+    display: inline-block;
+    text-overflow: ellipsis;
+}
+.mainmenu s{
+    font-size: 0.1rem;
+}
+.price1{
+    color: red;
+}

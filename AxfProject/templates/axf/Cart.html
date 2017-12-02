@@ -1,0 +1,50 @@
+{% extends 'axf/Base.html' %}
+{% load static %}
+{% block personResource %}
+    <link rel="stylesheet" href="{% static 'cart/css/cart.css' %}">
+    <script type="text/javascript" src="{% static 'base/js/jquery.js' %}"></script>
+    <script type="text/javascript">
+        $(function () {
+{#            $('.cartcontent').click(function () {#}
+{#                var myp = $(this).children('.mynum')#}
+{#                mynum = myp.html()#}
+{#                console.log(mynum)#}
+{#                if (mynum == 1) {#}
+{#                    var mya = $(this).children('a').children('.mycartleft')#}
+{#                    var myval = mya.html()#}
+{#                    console.log(myval)#}
+{#                    mya.css('background','#ccc')#}
+{#                }#}
+{#            })#}
+            $('.mycartleft').click(function () {
+                var myp = $(this).parent()
+                var myn = myp.next().html()
+                console.log(myn)
+                if (myn == 1) {
+                    $(this).css('background','#ccc');
+                }
+            })
+        })
+    </script>
+{% endblock %}
+{% block content %}
+    <div class="contents">
+        <div class="mycontent">
+            {% for ugood in ugoods %}
+                <div class="cartgoods">
+                    <div class="uleft"><img src="{{ ugood.tgoodid.productimg }}"></div>
+                    <div class="uright">
+                        <p>{{ ugood.tgoodid.productname }}</p>
+                        <p>￥：{{ ugood.tgoodid.price }}</p>
+                    </div>
+                    <div class="cartcontent">
+                        <a href="{% url 'axf:goodsub' ugood.tgoodid.id %}"><div class="mycartleft">-</div></a>
+                        <div class="mynum">{{ ugood.tgoodnum }}</div>
+                        <a href="{% url 'axf:goodadd' ugood.tgoodid.id %}"><div class="mycartright">+</div></a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

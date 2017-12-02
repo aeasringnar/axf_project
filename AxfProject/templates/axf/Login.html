@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>登录</title>
+    <link rel="stylesheet" href="{% static 'login/css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'base/css/reset.css' %}">
+    <script type="text/javascript" src="{% static 'base/js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'base/js/base.js' %}"></script>
+    <script type="text/javascript">
+        $(function () {
+            {#失去焦点之后进行的操作#}
+            $('#useraccount').change(function () {
+                var preccount = $('#useraccount').val();
+                var prepwad = $('#upassword').val();
+                var url = 'http://127.0.0.1:8000/axf/checklogin';
+                $.get(url, {'useraccount': preccount,'upassword':prepwad}, function (uresult) {
+                    $('#span01').html(uresult.status);
+                    if (uresult.status == '用户名不存在') {
+                        $('#span01').html(uresult.status);
+                        $('#useraccount').css('border-color', 'red');
+                    } else if (uresult.status == '用户密码错误') {
+                        $('#span01').html('');
+                        $('#useraccount').css('border-color', '#ccc');
+                    }
+
+                })
+            })
+            $('#submit02').click(function () {
+                var preccount = $('#useraccount').val();
+                var prepwad = $('#upassword').val();
+                var url = 'http://127.0.0.1:8000/axf/checklogin';
+                $.get(url, {'useraccount': preccount,'upassword':prepwad}, function (result) {
+{#                    $('#span01').html(result.status);#}
+                    if (result.status == '') {
+                        $('#span02').html('');
+                        $('#upassword').css('border-color', '#ccc');
+                        alert('登录成功！');
+                        window.location.replace("http://127.0.0.1:8000/axf/mine");
+                    } else if (result.status== '用户密码错误') {
+                        $('#span02').html(result.status);
+                        $('#upassword').css('border-color', 'red');
+
+                    }
+
+                })
+            })
+        })
+    </script>
+
+</head>
+<body>
+<div id="ulogin">
+    <button class="past"><a href="{% url 'axf:mine' %}">&lt返回&nbsp</a></button>
+    <div class="content">
+        <form method="post" action="#">
+            {% csrf_token %}
+            <input type="text" id="useraccount" class="inputype" name="useraccount" placeholder="请输入账号">
+            <sapn id="span01"></sapn>
+            <input type="password" id="upassword" class="inputype" name="upassword" placeholder="请输入密码">
+            <sapn id="span02"></sapn>
+            <br><input type="button" id="submit02" value="登录">
+        </form>
+    </div>
+</div>
+</body>
+</html>

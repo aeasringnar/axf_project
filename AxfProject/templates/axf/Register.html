@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>注册</title>
+    <link rel="stylesheet" href="{% static 'login/css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'base/css/reset.css' %}">
+    <script type="text/javascript" src="{% static 'base/js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'base/js/base.js' %}"></script>
+    <script type="text/javascript">
+        $(function () {
+            {#失去焦点之后进行的操作#}
+            $('#useraccount').change(function () {
+                var preuccount = $(this).val()
+                var url = 'http://127.0.0.1:8000/axf/checkuser'
+                $.get(url, {'useraccount': preuccount}, function (result) {
+                    $('#span01').html(result.status);
+                    if (result.status == '用户名已经存在') {
+                        $('#useraccount').css('border-color', 'red');
+                    } else if (result.status == '用户名可用') {
+                        $('#useraccount').css('border-color', '#ccc');
+                        $('#submit02').click(function () {
+                            alert('注册成功，请返回登录')
+                        })
+                    }
+
+                })
+            })
+
+        })
+    </script>
+
+</head>
+<body>
+<div id="ulogin">
+    <button class="past"><a href="{% url 'axf:mine' %}">&lt返回&nbsp</a></button>
+    <div class="content">
+        <form method="post" action="{% url 'axf:doregister' %}">
+            {% csrf_token %}
+            <input type="text" id="useraccount" class="inputype" name="useraccount" placeholder="请输入注册账号">
+            <sapn id="span01"></sapn>
+            <input type="password" class="inputype" name="upassword" placeholder="请输入密码">
+            <input type="text" class="inputype" name="username" placeholder="请输入昵称">
+            <input type="text" class="inputype" name="userphone" placeholder="请输入手机号">
+            <br><input type="submit" id="submit02" value="注册">
+        </form>
+    </div>
+</div>
+</body>
+</html>
